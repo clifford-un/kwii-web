@@ -18,6 +18,13 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
     </v-toolbar>
+    <template v-for="(message) in selected.messages">
+      <div :key="message" :class="[message.mine ? 'text-xs-left' : 'text-xs-right', errorClass]">
+            <v-chip>{{ message.message }}</v-chip>
+      </div>
+    </template>
+    <template>
+    </template>
     <v-navigation-drawer v-model="drawer" fixed app>
       <v-toolbar card color="primary" dark>
         <v-toolbar-title>KWII</v-toolbar-title>
@@ -47,9 +54,6 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-    <p>
-      hola
-    </p>
   </v-app>
 </template>
 
@@ -82,7 +86,25 @@ export default {
     selected: {
       avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
       name: 'Yarid Mujer',
-      last_message: 'Arch >> Manjaro. '
+      last_message: 'Arch >> Manjaro. ',
+      messages: [
+        {
+          mine: false,
+          message: 'This is just a test.'
+        },
+        {
+          mine: false,
+          message: 'But this really is.'
+        },
+        {
+          mine: false,
+          message: "If you don't trust me, try this."
+        },
+        {
+          mine: true,
+          message: 'This is just a test.'
+        }
+      ]
     },
     drawer: null,
     drawerRight: null,
