@@ -1,31 +1,50 @@
 <template>
   <v-app id="chat">
     <v-toolbar color="primary" card dark fixed app>
-      <v-btn icon @click.stop="drawer = !drawer">
-        <v-icon>{{ `chevron_${!drawer ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-toolbar-side-title>
-        <v-avatar>
-          <img :src="selected.avatar">
-        </v-avatar>
-      </v-toolbar-side-title>
-      <v-toolbar-title> {{ selected.name }} </v-toolbar-title>
-      <v-spacer />
-      <v-btn icon>
-        <v-icon>search</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>more_vert</v-icon>
-      </v-btn>
-    </v-toolbar>
-    <template v-for="(message) in selected.messages">
-      <div :key="message" :class="[message.mine ? 'text-xs-left' : 'text-xs-right', errorClass]">
-            <v-chip>{{ message.message }}</v-chip>
-      </div>
-    </template>
-    <template>
-    </template>
-    <v-navigation-drawer v-model="drawer" fixed app>
+        <v-btn icon @click.stop="drawer = !drawer">
+          <v-icon>{{ `chevron_${!drawer ? 'right' : 'left'}` }}</v-icon>
+        </v-btn>
+        <v-toolbar-side-title v-show="wchat">
+          <v-avatar>
+            <img :src="selected.avatar">
+          </v-avatar>
+        </v-toolbar-side-title>
+        <v-toolbar-title v-show="wchat">
+          {{ selected.name }}
+        </v-toolbar-title>
+        <v-spacer />
+        <v-btn icon v-show="wchat">
+          <v-icon @click="closeChat()">close</v-icon>
+        </v-btn>
+        <v-btn icon v-show="wchat">
+          <v-icon>search</v-icon>
+        </v-btn>
+        <v-btn icon v-show="wchat">
+          <v-icon>more_vert</v-icon>
+        </v-btn>
+      </v-toolbar>
+    <v-content>
+      <v-container>
+      <v-flex>
+        <template v-show="wchat">
+          <template v-for="(message) in selected.messages">
+            <div :key="message" :class="[message.mine ? 'text-xs-left' : 'text-xs-right', errorClass]">
+              <v-chip>{{ message.message }}</v-chip>
+            </div>
+          </template>
+        </template>
+      </v-flex>
+      <v-flex >
+        <v-flex>
+          <v-text-field
+            label="Message"
+            outline
+          />
+        </v-flex>
+      </v-flex>
+      </v-container>
+    </v-content>
+    <v-navigation-drawer v-model="drawer" absolute app>
       <v-toolbar card color="primary" dark>
         <v-toolbar-title>KWII</v-toolbar-title>
         <v-spacer />
@@ -37,8 +56,8 @@
         </v-btn>
       </v-toolbar>
       <v-list two-line>
-        <template v-for="(item) in items">
-          <v-list-tile :key="item.name" avatar>
+        <template v-for="(item) in friends">
+          <v-list-tile @click="selectFriend(item)" :key="item.name" avatar>
             <v-list-tile-avatar>
               <img :src="item.avatar">
             </v-list-tile-avatar>
@@ -66,7 +85,7 @@ export default {
     }
   },
   data: () => ({
-    items: [
+    friends: [
       {
         avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
         name: 'Toñito Fortich',
@@ -86,8 +105,23 @@ export default {
     selected: {
       avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
       name: 'Yarid Mujer',
-      last_message: 'Arch >> Manjaro. ',
-      messages: [
+      last_message: 'Arch >> Manjaro. '
+    },
+    wchat: false,
+    drawer: null,
+    drawerRight: null,
+    right: false,
+    left: false,
+    selectFriend(item) {
+      this.selected = item
+      this.getMessages(item)
+      this.wchat = true
+    },
+    closeChat() {
+      this.wchat = false
+    },
+    getMessages(item) {
+      item.messages = [
         {
           mine: false,
           message: 'This is just a test.'
@@ -105,11 +139,7 @@ export default {
           message: 'This is just a test.'
         }
       ]
-    },
-    drawer: null,
-    drawerRight: null,
-    right: false,
-    left: false
+    }
   })
 }
 </script>
