@@ -2,11 +2,9 @@
   <v-flex>
     <chat-tool-bar />
     <v-container fluid>
-      <v-content>
+      <v-content fluid>
         <chat-message-list v-show="wchat" />
-        <v-bottom-nav v-show="wchat">
-          <v-text-field label="Message" outline @click="setId(2)" />
-        </v-bottom-nav>
+        <v-text-field label="Message" outline />
       </v-content>
     </v-container>
   </v-flex>

@@ -1,31 +1,31 @@
 <template>
-    <v-toolbar color="primary" card dark fixed app>
-      <v-btn icon @click.stop="userChatDrawerCall()">
-        <v-icon>{{ `chevron_${!drawer ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-toolbar-side-title v-show="wchat">
-        <v-avatar>
-          <img :src="avatar">
-        </v-avatar>
-      </v-toolbar-side-title>
-      <v-toolbar-title v-show="wchat">
-        {{ name }}
-      </v-toolbar-title>
-      <v-spacer />
-      <v-btn v-show="wchat" icon>
-        <v-icon @click="closeChat()">
-          close
-        </v-icon>
-      </v-btn>
-      <v-btn v-show="wchat" icon>
-        <v-icon>
-          search
-        </v-icon>
-      </v-btn>
-      <v-btn v-show="wchat" icon>
-        <v-icon>more_vert</v-icon>
-      </v-btn>
-    </v-toolbar>
+  <v-toolbar color="primary" card dark fixed app>
+    <v-btn icon @click.stop="userChatDrawerCall()">
+      <v-icon>{{ `chevron_${!drawer ? 'right' : 'left'}` }}</v-icon>
+    </v-btn>
+    <v-toolbar-side-title v-show="wchat">
+      <v-avatar>
+        <img :src="avatar">
+      </v-avatar>
+    </v-toolbar-side-title>
+    <v-toolbar-title v-show="wchat">
+      {{ name }}
+    </v-toolbar-title>
+    <v-spacer />
+    <v-btn v-show="wchat" icon>
+      <v-icon @click="closeChat()">
+        close
+      </v-icon>
+    </v-btn>
+    <v-btn v-show="wchat" icon>
+      <v-icon>
+        search
+      </v-icon>
+    </v-btn>
+    <v-btn v-show="wchat" icon>
+      <v-icon>more_vert</v-icon>
+    </v-btn>
+  </v-toolbar>
 </template>
 
 <script>
