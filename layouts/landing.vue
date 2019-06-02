@@ -26,11 +26,11 @@
             v-model="active_option"
             row
           >
-          <v-radio
-            v-for="option in options.length"
-            :key="option"
-            :value="option-1"
-          />
+            <v-radio
+              v-for="option in options.length"
+              :key="option"
+              :value="option-1"
+            />
           </v-radio-group>
         </v-flex>
       </v-container>

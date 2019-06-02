@@ -1,7 +1,7 @@
 <template>
-      <div>
-      <h1>Registro</h1>
-      <v-form
+  <div>
+    <h1>Registro</h1>
+    <v-form
       ref="form"
       v-model="valid"
       lazy-validation
@@ -12,26 +12,26 @@
         :rules="nameRules"
         label="Name"
         required
-      ></v-text-field>
+      />
       <v-text-field
         v-model="email"
         :rules="emailRules"
         label="E-mail"
         required
-      ></v-text-field>
+      />
       <v-select
         v-model="select"
         :items="items"
         :rules="[v => !!v || 'Item is required']"
         label="Item"
         required
-      ></v-select>
+      />
       <v-checkbox
         v-model="checkbox"
         :rules="[v => !!v || 'You must agree to continue!']"
         label="Do you agree?"
         required
-      ></v-checkbox>
+      />
       <v-btn
         :disabled="!valid"
         color="success"
@@ -52,7 +52,7 @@
         Reset Validation
       </v-btn>
     </v-form>
-      </div>
+  </div>
 </template>
 
 <script>
