@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import { request } from 'graphql-request'
 import Vue from 'vue'
 import VeeValidate from 'vee-validate'
 
@@ -78,13 +79,32 @@ export default {
       password: '',
       email: '',
       phone: '',
-      show: false
+      show: false,
+      response: 'a'
     }
   },
   methods: {
-    submit() {
-      this.username = ''
-      this.password = ''
+    async submit() {
+      const query = `
+      mutation {
+      createUser(user: {
+      user_name: "${this.username}"
+      password: "${this.password}"
+      temp: false
+      phone_number: ${this.phone}
+      e_mail: "${this.email}"
+      last_connection:"today"
+      }){
+      user{
+      user_name
+      }
+      }
+      }`
+      try {
+        this.response = await request('http://192.168.99.113:5500/graphql', query)
+      } catch (e) {
+        this.test = false
+      }
     },
     register() {
       this.$emit('update:register', false)

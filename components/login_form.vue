@@ -70,8 +70,8 @@ export default {
       const query = `
       mutation {
       createToken(user: {
-      userName: "this.username"
-      password: "this.password"
+      userName: "${this.username}"
+      password: "${this.password}"
       }) {
       jwt
       }
