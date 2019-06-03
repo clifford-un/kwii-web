@@ -14,7 +14,7 @@
         />
         <v-text-field
           v-model="password"
-          v-validate="'required'"
+          v-validate="'required|min:8'"
           prepend-inner-icon="visibility"
           :error-messages="errors.collect('password')"
           :append-icon="show ? 'visibility' : 'visibility_off'"
@@ -26,7 +26,7 @@
         />
         <v-text-field
           v-model="email"
-          v-validate="'required'"
+          v-validate="'required|email'"
           prepend-inner-icon="email"
           :error-messages="errors.collect('email')"
           name="email"
@@ -35,7 +35,7 @@
         />
         <v-text-field
           v-model="phone"
-          v-validate="'required'"
+          v-validate="'required|numeric'"
           prepend-inner-icon="phone"
           :error-messages="errors.collect('phone')"
           name="phone"
