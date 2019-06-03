@@ -1,16 +1,16 @@
 <template>
   <v-list two-line>
-    <template v-for="(friend) in friends">
-      <v-list-tile :key="friend.id" avatar @click="selectFriend(chat)">
+    <template v-for="(chat) in chats">
+      <v-list-tile :key="chat.chatRoomId" avatar @click="selectFriend(chat)">
         <v-list-tile-avatar>
-          <img src="https://justice.org.au/wp-content/uploads/2017/08/avatar-icon.png">
+          <img :src="chat.avatar">
         </v-list-tile-avatar>
         <v-list-tile-content>
           <v-list-tile-title>
-            {{ friend[0].user_name }}
+            {{ chat.name }}
           </v-list-tile-title>
           <v-list-tile-sub-title>
-            test
+           {{ chat.last_message }}
           </v-list-tile-sub-title>
         </v-list-tile-content>
       </v-list-tile>
@@ -22,7 +22,6 @@ import { request } from 'graphql-request'
 import { URL } from 'static/variables.js'
 export default {
   data: () => ({
-    friends: [],
     chats: [
       {
         avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
@@ -44,22 +43,35 @@ export default {
       }
     ]
   }),
-  async mounted() {
-    const query = `
-    query{
-      allUsers{
-        user{
-          user_name
-          friends{
-            user_name
-          }
-        }
-      }
-    }`
-    const user = await request(URL, query)
-    this.friends = user.allUsers[0].user.friends
+  mounted() {
+    this.getFriendList()
   },
   methods: {
+    async getFriendList() {
+      const query = `
+      query{
+        allUsers{
+          user{
+            user_name
+            friends{
+              id
+              user_name
+            }
+          }
+        }
+      }`
+      const user = await request(URL, query)
+      this.friends = user.allUsers[0].user.friends
+      this.chats = []
+      this.friends.forEach((element) => {
+        const dummElement = {}
+        dummElement.name = element[0].user_name
+        dummElement.last_message = 'Hola!'
+        dummElement.avatar = `https://cdn.vuetifyjs.com/images/lists/${element[0].id}.jpg`
+        dummElement.chatRoomId = 'mentiritas'
+        this.chats.push(dummElement)
+      })
+    },
     selectFriend(chat) {
       this.$bus.$emit('selectedChat', chat)
     }

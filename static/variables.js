@@ -1,2 +1,2 @@
 /* eslint-disable */
-export const URL = 'http://192.168.99.113:5500/graphql'
+export const URL = 'http://35.245.79.61/graphql'
