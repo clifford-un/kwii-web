@@ -1,5 +1,8 @@
 <template>
   <v-container>
+      <h2 v-if="!test">
+      Incorrect id/password
+      </h2>
       <form>
         <v-flex xs6 offset-xs3>
           <v-text-field
@@ -37,6 +40,7 @@
 </template>
 
 <script>
+import { request } from 'graphql-request'
 import Vue from 'vue'
 import VeeValidate from 'vee-validate'
 Vue.use(VeeValidate)
@@ -46,14 +50,30 @@ export default {
     return {
       username: '',
       password: '',
-      show: false
+      show: false,
+      test: true,
+      jwt: ''
     }
   },
   methods: {
-    submit() {
-      this.username = ''
-      this.password = ''
+    async submit() {
+      const query = `
+      mutation {
+      createToken(user: {
+      userName: "this.username"
+      password: "this.password"
+      }) {
+      jwt
+      }
+      }`
+      try {
+        this.test = true
+        this.jwt = '' + await request('http://192.168.99.113:5500/graphql', query)
+      } catch (e) {
+        this.test = false
+      }
     }
   }
 }
+
 </script>
