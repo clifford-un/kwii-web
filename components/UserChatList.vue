@@ -1,20 +1,18 @@
 <template>
-  <v-list two-line>
-    <template v-for="(chat) in chats">
-      <v-list-tile :key="chat.name" avatar @click="selectFriend(chat)">
-        <v-list-tile-avatar>
-          <img :src="chat.avatar">
-        </v-list-tile-avatar>
-        <v-list-tile-content>
-          <v-list-tile-title>
-            {{ chat.name }}
-          </v-list-tile-title>
-          <v-list-tile-sub-title>
-            {{ chat.last_message }}
-          </v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </template>
+  <v-list two-line fluid>
+    <v-list-tile v-for="(chat) in chats" :key="chat.name" avatar @click="selectFriend(chat)">
+      <v-list-tile-avatar>
+        <img :src="chat.avatar">
+      </v-list-tile-avatar>
+      <v-list-tile-content>
+        <v-list-tile-title>
+          {{ chat.name }}
+        </v-list-tile-title>
+        <v-list-tile-sub-title>
+          {{ chat.last_message }}
+        </v-list-tile-sub-title>
+      </v-list-tile-content>
+    </v-list-tile>
   </v-list>
 </template>
 <script>

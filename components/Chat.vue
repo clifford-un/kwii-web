@@ -1,13 +1,19 @@
 <template>
-  <v-flex>
-    <chat-tool-bar />
-    <v-container fluid>
-      <v-content fluid>
-        <chat-message-list v-show="wchat" />
-        <v-text-field label="Message" outline />
-      </v-content>
-    </v-container>
-  </v-flex>
+  <v-app>
+    <v-content>
+      <chat-tool-bar />
+      <chat-message-list v-show="wchat" />
+      <v-bottom-nav v-show="wchat" :active.sync="bottomNav" flat :value="true" absolute>
+        <v-text-field v-model="message" outline clearable label="Message" type="text">
+        </v-text-field>
+        <v-btn>
+          <v-icon @click="send()">
+            send
+          </v-icon>
+        </v-btn>
+      </v-bottom-nav>
+    </v-content>
+  </v-app>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar card color="primary" dark>
+  <v-toolbar card color="primary" dark fixed>
     <v-toolbar-title>KWII</v-toolbar-title>
     <v-spacer />
     <v-btn icon>

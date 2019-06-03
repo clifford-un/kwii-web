@@ -1,13 +1,12 @@
 <template>
-  <v-flex>
+  <v-app id="userChat" fluid>
     <user-chats-tool-bar />
-    <user-chat-list />
-  </v-flex>
+    <user-chat-list fluid />
+  </v-app>
 </template>
 <script>
-import UserChatList from '~/components/UserChatList.vue'
 import UserChatsToolBar from '~/components/UserChatsToolBar.vue'
-
+import UserChatList from '~/components/UserChatList.vue'
 export default {
   components: {
     UserChatList,

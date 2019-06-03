@@ -1,13 +1,11 @@
 <template>
-  <v-flex>
-    <template>
-      <template v-for="(message) in messages">
-        <div :key="message" :class="[message.mine ? 'text-xs-left' : 'text-xs-right', errorClass]">
-          <v-chip>{{ message.text }}</v-chip>
-        </div>
-      </template>
-    </template>
-  </v-flex>
+  <v-container>
+    <v-flex v-for="(message) in messages" :key="message.id">
+      <div :key="message" :class="[message.mine ? 'text-xs-left' : 'text-xs-right', errorClass]">
+        <v-chip>{{ message.text }}</v-chip>
+      </div>
+    </v-flex>
+  </v-container>
 </template>
 <script>
 export default {
@@ -37,6 +35,14 @@ export default {
         {
           mine: true,
           text: 'This was just a test.'
+        },
+        {
+          mine: false,
+          text: 'But this really was.'
+        },
+        {
+          mine: false,
+          text: 'But this really was.'
         },
         {
           mine: false,

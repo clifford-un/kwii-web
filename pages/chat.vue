@@ -1,7 +1,7 @@
 <template>
   <v-app id="chats">
     <chat />
-    <v-navigation-drawer v-model="drawer" absolute app>
+    <v-navigation-drawer v-model="drawer" app fluid>
       <user-chats />
     </v-navigation-drawer>
   </v-app>
