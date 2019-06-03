@@ -1,16 +1,16 @@
 <template>
   <v-list two-line>
-    <template v-for="(chat) in chats">
-      <v-list-tile :key="chat.name" avatar @click="selectFriend(chat)">
+    <template v-for="(friend) in friends">
+      <v-list-tile :key="friend.id" avatar @click="selectFriend(chat)">
         <v-list-tile-avatar>
-          <img :src="chat.avatar">
+          <img src="https://justice.org.au/wp-content/uploads/2017/08/avatar-icon.png">
         </v-list-tile-avatar>
         <v-list-tile-content>
           <v-list-tile-title>
-            {{ chat.name }}
+            {{ friend[0].user_name }}
           </v-list-tile-title>
           <v-list-tile-sub-title>
-            {{ chat.last_message }}
+            test
           </v-list-tile-sub-title>
         </v-list-tile-content>
       </v-list-tile>
@@ -18,8 +18,10 @@
   </v-list>
 </template>
 <script>
+import { request } from 'graphql-request'
 export default {
   data: () => ({
+    friends: [],
     chats: [
       {
         avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
@@ -41,6 +43,21 @@ export default {
       }
     ]
   }),
+  async mounted() {
+    const query = `
+    query{
+      allUsers{
+        user{
+          user_name
+          friends{
+            user_name
+          }
+        }
+      }
+    }`
+    const user = await request('http://192.168.99.113:5500/graphql', query)
+    this.friends = user.allUsers[0].user.friends
+  },
   methods: {
     selectFriend(chat) {
       this.$bus.$emit('selectedChat', chat)
