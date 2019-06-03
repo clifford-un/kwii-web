@@ -1,7 +1,7 @@
 <template>
   <v-toolbar color="primary" card dark fixed app>
     <v-btn icon @click.stop="userChatDrawerCall()">
-      <v-icon>{{ `chevron_${!drawer ? 'right' : 'left'}` }}</v-icon>
+      <v-icon>{{ `chevron_${!drawer ? 'left' : 'right'}` }}</v-icon>
     </v-btn>
     <v-toolbar-side-title v-show="wchat">
       <v-avatar>

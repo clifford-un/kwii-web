@@ -1,27 +1,38 @@
 <template>
   <v-list two-line>
-    <template v-for="(friend) in friends">
-      <v-list-tile :key="friend.id" avatar @click="selectFriend(chat)">
+    <v-subheader>Requests from</v-subheader>
+    <template v-for="(chat) in chats">
+      <v-list-tile :key="chat.id" avatar>
         <v-list-tile-avatar>
-          <img src="https://justice.org.au/wp-content/uploads/2017/08/avatar-icon.png">
+          <img src="https://cdn.vuetifyjs.com/images/lists/1.jpg">
         </v-list-tile-avatar>
         <v-list-tile-content>
           <v-list-tile-title>
-            {{ friend[0].user_name }}
+            {{ chat.name }}
           </v-list-tile-title>
           <v-list-tile-sub-title>
-            test
+            Wants to be your friend!
           </v-list-tile-sub-title>
         </v-list-tile-content>
+        <v-list-tile-action>
+            <v-btn icon>
+            <v-icon>check</v-icon>
+            </v-btn>
+            <v-btn icon>
+            <v-icon>close</v-icon>
+            </v-btn>
+        </v-list-tile-action>
       </v-list-tile>
     </template>
   </v-list>
 </template>
 <script>
-import { request } from 'graphql-request'
-import { URL } from 'static/variables.js'
+// import { request } from 'graphql-request'
+// import { URL } from 'static/variables.js'
 export default {
   data: () => ({
+    to: [],
+    from: [],
     friends: [],
     chats: [
       {
@@ -43,26 +54,6 @@ export default {
         chatRoomId: 3
       }
     ]
-  }),
-  async mounted() {
-    const query = `
-    query{
-      allUsers{
-        user{
-          user_name
-          friends{
-            user_name
-          }
-        }
-      }
-    }`
-    const user = await request(URL, query)
-    this.friends = user.allUsers[0].user.friends
-  },
-  methods: {
-    selectFriend(chat) {
-      this.$bus.$emit('selectedChat', chat)
-    }
-  }
+  })
 }
 </script>
