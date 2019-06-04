@@ -4,7 +4,7 @@
     <template v-for="(chat) in chats">
       <v-list-tile :key="chat.id" avatar>
         <v-list-tile-avatar>
-          <img src="https://cdn.vuetifyjs.com/images/lists/1.jpg">
+          <img :src="chat.avatar">
         </v-list-tile-avatar>
         <v-list-tile-content>
           <v-list-tile-title>
