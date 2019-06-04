@@ -4,7 +4,7 @@
     <v-container fluid>
       <v-content fluid>
         <chat-message-list v-show="wchat" />
-        <v-text-field label="Message" outline />
+        <chat-message-bar v-show="wchat" />
       </v-content>
     </v-container>
   </v-flex>
@@ -13,10 +13,12 @@
 <script>
 import ChatMessageList from '~/components/ChatMessageList.vue'
 import ChatToolBar from '~/components/ChatToolBar.vue'
+import ChatMessageBar from '~/components/ChatMessageBar.vue'
 export default {
   components: {
     ChatMessageList,
-    ChatToolBar
+    ChatToolBar,
+    ChatMessageBar
   },
   data: () => ({
     wchat: false

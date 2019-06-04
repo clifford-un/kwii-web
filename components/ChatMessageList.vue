@@ -31,6 +31,9 @@ export default {
       this.setChat(chat)
       this.getMessages()
     })
+    this.$bus.$on('messageSent', (chat) => {
+      this.getMessages()
+    })
   },
   methods: {
     setChat(chat) {
