@@ -2,10 +2,10 @@
   <v-flex>
     <user-chats-tool-bar />
     <div v-if="drawer">
-    <user-chat-list/>
+      <user-chat-list />
     </div>
     <div v-if="!drawer">
-    <user-requests/>
+      <user-requests />
     </div>
   </v-flex>
 </template>

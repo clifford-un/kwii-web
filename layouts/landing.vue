@@ -43,7 +43,7 @@
 </template>
 <style scoped>
     #chooser{
-        background-color: #618475
+        background-color: #51AA69
     }
     #appImage{
         margin: 100px 10px 50px 10px;

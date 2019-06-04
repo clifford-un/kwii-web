@@ -54,7 +54,7 @@
           <v-btn
             round
             large
-            color="#009688"
+            color="#51AA69"
             @click="register"
           >
             Back
