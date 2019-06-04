@@ -1,8 +1,8 @@
 <template>
   <v-container>
-      <h2 v-if="!test">
+    <h2 v-if="!test">
       Incorrect id/password
-      </h2>
+    </h2>
     <v-form>
       <v-flex xs6 offset-xs3>
         <v-text-field
@@ -30,16 +30,16 @@
           <v-btn
             round
             large
-            color="#009688"
-            @click="submit"
+            color="#51AA69"
             href="/chat"
+            @click="submit"
           >
             sign In
           </v-btn>
           <v-btn
             round
             large
-            color="orange"
+            color="red"
             @click="register"
           >
             sign Up

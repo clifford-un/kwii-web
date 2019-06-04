@@ -14,7 +14,7 @@
     @click:prepend="changeIcon"
     @click:clear="clearMessage"
     @keyup.native.enter="sendMessage"
-  ></v-text-field>
+  />
 </template>
 <script>
 import { request } from 'graphql-request'
@@ -41,6 +41,9 @@ export default {
     icon() {
       return this.icons[this.iconIndex]
     }
+  },
+  mounted() {
+    this.$bus.$on('selectedChat', (chat) => { this.chatroomId = chat.chatRoomId })
   },
   methods: {
     toggleMarker() {
@@ -77,9 +80,6 @@ export default {
     changeIcon() {
       this.iconIndex === this.icons.length - 1 ? this.iconIndex = 0 : this.iconIndex++
     }
-  },
-  mounted() {
-    this.$bus.$on('selectedChat', (chat) => { this.chatroomId = chat.chatRoomId })
   }
 }
 </script>

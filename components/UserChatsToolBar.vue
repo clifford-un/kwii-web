@@ -11,8 +11,8 @@
     <v-btn icon @click.stop="requestViewDrawerCall()">
       <v-icon>{{ `${!request ? 'sms' : 'group_add'}` }}</v-icon>
     </v-btn>
-    <div id="requests" v-if="request_num!=0 && request">
-    <h5/>3
+    <div v-if="request_num!=0 && request" id="requests">
+      <h5 />3
     </div>
   </v-toolbar>
 </template>

@@ -15,12 +15,12 @@
           </v-list-tile-sub-title>
         </v-list-tile-content>
         <v-list-tile-action>
-            <v-btn icon>
+          <v-btn icon>
             <v-icon>check</v-icon>
-            </v-btn>
-            <v-btn icon>
+          </v-btn>
+          <v-btn icon>
             <v-icon>close</v-icon>
-            </v-btn>
+          </v-btn>
         </v-list-tile-action>
       </v-list-tile>
     </template>
