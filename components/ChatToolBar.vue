@@ -44,7 +44,7 @@ export default {
   methods: {
     selectChat(chat) {
       this.wchat = true
-      this.avatar = chat.avatar
+      this.avatar = 'https://image.flaticon.com/icons/svg/254/254017.svg'
       this.name = chat.name
     },
     closeChat() {

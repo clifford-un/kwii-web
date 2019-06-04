@@ -50,25 +50,22 @@ export default {
     async getFriendList() {
       const query = `
       query{
-        allUsers{
-          user{
-            user_name
-            friends{
-              id
-              user_name
-            }
-          }
+        getChatroomsByUser(user_id: 1){
+          id
+          name
+          users
         }
       }`
-      const user = await request(URL, query)
-      this.friends = user.allUsers[0].user.friends
+      const chatsRequest = await request(URL, query)
       this.chats = []
-      this.friends.forEach((element) => {
+      this.chatsSub = []
+      this.chatsSub = chatsRequest.getChatroomsByUser
+      this.chatsSub.forEach((element) => {
         const dummElement = {}
-        dummElement.name = element[0].user_name
+        dummElement.name = element.name
         dummElement.last_message = 'Hola!'
-        dummElement.avatar = `https://cdn.vuetifyjs.com/images/lists/${element[0].id}.jpg`
-        dummElement.chatRoomId = 'mentiritas'
+        dummElement.avatar = `https://image.flaticon.com/icons/svg/254/254017.svg`
+        dummElement.chatRoomId = element.id
         this.chats.push(dummElement)
       })
     },

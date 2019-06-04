@@ -77,6 +77,9 @@ export default {
     changeIcon() {
       this.iconIndex === this.icons.length - 1 ? this.iconIndex = 0 : this.iconIndex++
     }
+  },
+  mounted() {
+    this.$bus.$on('selectedChat', (chat) => { this.chatroomId = chat.chatRoomId })
   }
 }
 </script>
