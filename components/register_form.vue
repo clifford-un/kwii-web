@@ -46,7 +46,7 @@
           <v-btn
             round
             large
-            color="orange"
+            color="red"
             @click="submit"
           >
             Submit
@@ -54,7 +54,7 @@
           <v-btn
             round
             large
-            color="red"
+            color="#009688"
             @click="register"
           >
             Back

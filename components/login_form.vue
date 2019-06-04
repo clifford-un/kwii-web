@@ -30,8 +30,9 @@
           <v-btn
             round
             large
-            color="green"
+            color="#009688"
             @click="submit"
+            href="/chat"
           >
             sign In
           </v-btn>
