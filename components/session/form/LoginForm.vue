@@ -1,53 +1,44 @@
 <template>
-  <v-container>
-    <h2 v-if="!test">
-      Incorrect id/password
-    </h2>
-    <v-form>
-      <v-flex xs6 offset-xs3>
-        <v-text-field
-          v-model="username"
-          v-validate="'required'"
-          prepend-inner-icon="person_pin"
-          :error-messages="errors.collect('username')"
-          label="username"
-          data-vv-name="username"
-          required
-          clearable
-        />
-        <v-text-field
-          v-model="password"
-          v-validate="'required'"
-          :error-messages="errors.collect('password')"
-          :append-icon="show ? 'visibility' : 'visibility_off'"
-          :type="show ? 'text' : 'password'"
-          name="password"
-          label="password"
-          value=""
-          @click:append="show = !show"
-        />
-        <center>
-          <v-btn
-            round
-            large
-            color="#51AA69"
-            href="/chat"
-            @click="submit"
-          >
-            sign In
-          </v-btn>
-          <v-btn
-            round
-            large
-            color="red"
-            @click="register"
-          >
-            sign Up
-          </v-btn>
-        </center>
-      </v-flex>
-    </v-form>
-  </v-container>
+  <v-form>
+      <v-text-field
+        v-model="username"
+        v-validate="'required'"
+        prepend-inner-icon="person_pin"
+        :error-messages="errors.collect('username')"
+        label="username"
+        data-vv-name="username"
+        required
+        clearable
+      />
+      <v-text-field
+        v-model="password"
+        v-validate="'required'"
+        :error-messages="errors.collect('password')"
+        :append-icon="show ? 'visibility' : 'visibility_off'"
+        :type="show ? 'text' : 'password'"
+        name="password"
+        label="password"
+        value=""
+        @click:append="show = !show"
+      />
+        <v-btn
+          round
+          large
+          color="#51AA69"
+          href="/chat"
+          @click="submit"
+        >
+          sign In
+        </v-btn>
+        <v-btn
+          round
+          large
+          color="red"
+          @click="register"
+        >
+          sign Up
+        </v-btn>
+  </v-form>
 </template>
 
 <script>

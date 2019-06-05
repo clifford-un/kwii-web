@@ -1,14 +1,10 @@
 <template>
-  <v-app>
-    <v-container>
-      <v-content>
-        <v-layout column>
-          <registerForm v-if="register" :register.sync="register" />
-          <loginForm v-else :register.sync="register" />
-        </v-layout>
-      </v-content>
-    </v-container>
-  </v-app>
+  <v-content fill-height fluid app>
+    <v-layout align-center justify-center fill-height>
+      <register-form v-if="register" :register.sync="register" />
+      <login-form v-else :register.sync="register" />
+    </v-layout>
+  </v-content>
 </template>
 
 <script>

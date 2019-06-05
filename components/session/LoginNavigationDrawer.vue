@@ -37,7 +37,6 @@
 export default {
   data: () => {
     return {
-      length: 3,
       onboarding: 0,
       images: [
         {

@@ -1,6 +1,6 @@
 <template>
   <v-form>
-    <v-flex xs6 offset-xs3>
+    <v-flex>
       <v-text-field
         v-model="username"
         v-validate="'required'"
