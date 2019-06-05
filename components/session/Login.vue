@@ -1,8 +1,12 @@
 <component @update_form="update_form" />
 <template>
   <v-app>
-    <registerForm v-if="register" :register.sync="register" />
-    <loginForm v-else :register.sync="register" />
+    <v-container>
+      <v-content>
+        <registerForm v-if="register" :register.sync="register" />
+        <loginForm v-else :register.sync="register" />
+      </v-content>
+    </v-container>
   </v-app>
 </template>
 
