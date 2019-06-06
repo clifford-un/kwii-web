@@ -1,43 +1,55 @@
 <template>
   <v-form>
-      <v-text-field
-        v-model="username"
-        v-validate="'required'"
-        prepend-inner-icon="person_pin"
-        :error-messages="errors.collect('username')"
-        label="username"
-        data-vv-name="username"
-        required
-        clearable
-      />
+    <h3 class="secundary--text">
+      Username
+    </h3>
+    <v-text-field
+      v-model="username"
+      v-validate="'required'"
+      prepend-inner-icon="face"
+      :error-messages="errors.collect('username')"
+      label="Hint username"
+      data-vv-name="username"
+      required
+      clearable
+      @click="show=true"
+    />
+    <v-slide-y-transition>
+      <h3 v-show="show">
+        Password
+      </h3>
+    </v-slide-y-transition>
+    <v-slide-y-transition>
       <v-text-field
         v-model="password"
         v-validate="'required'"
+        prepend-inner-icon="vpn_key"
         :error-messages="errors.collect('password')"
         :append-icon="show ? 'visibility' : 'visibility_off'"
         :type="show ? 'text' : 'password'"
         name="password"
-        label="password"
+        label="Hint password"
         value=""
-        @click:append="show = !show"
+        v-show="show"
       />
-        <v-btn
-          round
-          large
-          color="#51AA69"
-          href="/chat"
-          @click="submit"
-        >
-          sign In
-        </v-btn>
-        <v-btn
-          round
-          large
-          color="red"
-          @click="register"
-        >
-          sign Up
-        </v-btn>
+    </v-slide-y-transition>
+      <v-btn
+        round
+        large
+        color="#51AA69"
+        href="/chat"
+        @click="submit"
+      >
+        sign In
+      </v-btn>
+      <v-btn
+        round
+        large
+        color="red"
+        @click="register"
+      >
+        sign Up
+      </v-btn>
   </v-form>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" width="500%" absolutes app>
+  <v-navigation-drawer v-model="drawer" width="550%" absolutes app>
     <v-layout fill-height align-center primary>
       <v-card flat column width="100%" color="primary">
         <v-window class="mb-5" v-model="onboarding" fluid>
