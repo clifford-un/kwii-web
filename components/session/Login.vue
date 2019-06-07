@@ -1,9 +1,10 @@
 <template>
   <v-content fill-height fluid app>
     <v-layout align-center justify-center fill-height>
-      <register-form v-if="register" :register.sync="register" />
-      <login-form v-else :register.sync="register" />
+      <register-form v-show="register" />
+      <login-form v-show="!register" />
     </v-layout>
+    <v-divider />
   </v-content>
 </template>
 
@@ -20,6 +21,10 @@ export default {
     return {
       register: false
     }
+  },
+  mounted() {
+    this.$bus.$on('session:from:registerForm:login', () => { this.register = false })
+    this.$bus.$on('session:from:registerForm:register', () => { this.register = true })
   }
 }
 </script>

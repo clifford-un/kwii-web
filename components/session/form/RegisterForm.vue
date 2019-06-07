@@ -1,75 +1,53 @@
 <template>
-  <v-form>
-    <v-flex>
+  <v-flex xs4>
+    <v-form>
       <v-text-field
         v-model="username"
-        v-validate="'required'"
-        prepend-inner-icon="person_pin"
-        :error-messages="errors.collect('username')"
-        label="username"
-        data-vv-name="username"
+        prepend-icon="person_pin"
+        label="Username"
         required
-        clearable
+        :rules="usernameRules"
       />
       <v-text-field
         v-model="password"
-        v-validate="'required|min:8'"
-        prepend-inner-icon="visibility"
-        :error-messages="errors.collect('password')"
+        prepend-icon="vpn_key"
         :append-icon="show ? 'visibility' : 'visibility_off'"
         :type="show ? 'text' : 'password'"
         name="password"
-        label="password"
-        value=""
+        label="Password"
+        :rules="passwordRules"
         @click:append="show = !show"
       />
       <v-text-field
         v-model="email"
-        v-validate="'required|email'"
-        prepend-inner-icon="email"
-        :error-messages="errors.collect('email')"
+        prepend-icon="email"
         name="email"
         label="email"
-        value=""
+        :rules="emailRules"
       />
       <v-text-field
         v-model="phone"
-        v-validate="'required|numeric'"
-        prepend-inner-icon="phone"
-        :error-messages="errors.collect('phone')"
-        name="phone"
+        prepend-icon="phone"
         label="phone"
-        value=""
+        :rules="phoneRules"
       />
-      <center>
-        <v-btn
-          round
-          large
-          color="red"
-          @click="submit"
-        >
-          Submit
-        </v-btn>
-        <v-btn
-          round
-          large
-          color="#51AA69"
-          @click="register"
-        >
-          Back
-        </v-btn>
-      </center>
-    </v-flex>
-  </v-form>
+    </v-form>
+    <v-layout row justify-space-between>
+      <v-btn flat color="primary" @click="login">
+        <v-icon>
+          chevron_left
+        </v-icon>
+      </v-btn>
+      <v-btn flat color="primary" @click="signup">
+        <v-icon>
+          person_add
+        </v-icon>
+      </v-btn>
+    </v-layout>
+  </v-flex>
 </template>
 
 <script>
-import { request } from 'graphql-request'
-import Vue from 'vue'
-import VeeValidate from 'vee-validate'
-
-Vue.use(VeeValidate)
-
 export default {
   data: () => {
     return {
@@ -78,34 +56,33 @@ export default {
       email: '',
       phone: '',
       show: false,
-      response: 'a'
+      response: 'a',
+      usernameRules: [
+        v => !!v || 'We need your username to sign you up D:',
+        v => /^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/.test(v) || 'Your username have weird symbols :c',
+        v => (v && v.length <= 32) || 'Your username is too big for our databases :c',
+        v => (v && v.length >= 4) || 'Your username is too short :c'
+      ],
+      passwordRules: [
+        v => !!v || 'We need your password to sign you up D:',
+        v => (v && v.length >= 8) || 'Your password is too short :c'
+      ],
+      emailRules: [
+        v => !!v || 'We need your email to sign you up D:',
+        v => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'Your e-mail must be valid :c'
+      ],
+      phoneRules: [
+        v => !!v || 'We need your email to sign you up D:',
+        v => /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/.test(v) || 'Your phone looks weird :c'
+      ]
     }
   },
   methods: {
-    async submit() {
-      const query = `
-      mutation {
-      createUser(user: {
-      user_name: "${this.username}"
-      password: "${this.password}"
-      temp: false
-      phone_number: ${this.phone}
-      e_mail: "${this.email}"
-      last_connection:"today"
-      }){
-      user{
-      user_name
-      }
-      }
-      }`
-      try {
-        this.response = await request('http://192.168.99.113:5500/graphql', query)
-      } catch (e) {
-        this.test = false
-      }
+    login() {
+      this.$bus.$emit('session:from:registerForm:login')
     },
-    register() {
-      this.$emit('update:register', false)
+    signup() {
+      throw new TypeError('Not implemented yet!')
     }
   }
 }

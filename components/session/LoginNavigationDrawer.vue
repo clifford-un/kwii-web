@@ -2,30 +2,40 @@
   <v-navigation-drawer v-model="drawer" width="550%" absolutes app>
     <v-layout fill-height align-center primary>
       <v-card flat column width="100%" color="primary">
-        <v-window class="mb-5" v-model="onboarding" fluid>
+        <v-window v-model="onboarding" class="mb-5" fluid>
           <v-window-item v-for="(image,i) in images" :key="i">
             <v-layout align-center column fill-height fluid>
               <v-icon color="secundary" size="1000%">
                 {{ image.icon }}
               </v-icon>
-              <h1 class="display-3 white--text"> {{ image.appTitle }} </h1>
-              <h3 class="headline white--text"> {{ image.text }} </h3>
+              <h1 class="display-3 white--text">
+                {{ image.appTitle }}
+              </h1>
+              <h3 class="headline white--text">
+                {{ image.text }}
+              </h3>
             </v-layout>
           </v-window-item>
         </v-window>
         <v-card-actions class="justify-space-between mt-5">
           <v-btn flat @click="prev">
-            <v-icon color="white">chevron_left</v-icon>
+            <v-icon color="white">
+              chevron_left
+            </v-icon>
           </v-btn>
           <v-item-group v-model="onboarding" class="text-xs-center" mandatory>
             <v-item v-for="(image,i) in images" :key="i">
               <v-btn slot-scope="{ active, toggle }" :input-value="active" icon @click="toggle">
-                <v-icon large color="white">radio_button_unchecked</v-icon>
+                <v-icon large color="white">
+                  radio_button_unchecked
+                </v-icon>
               </v-btn>
             </v-item>
           </v-item-group>
           <v-btn flat @click="next">
-            <v-icon color="white">chevron_right</v-icon>
+            <v-icon color="white">
+              chevron_right
+            </v-icon>
           </v-btn>
         </v-card-actions>
       </v-card>
