@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Chat from '~/components/chat/Chat.vue'
-import UserChats from '~/components/chat/user_bar/UserChats.vue'
+import Chat from '~/components/chat_environment/ChatEnvironment.vue'
+import UserChats from '~/components/chat_environment/nav_bar/ChatNavbar.vue'
 
 export default {
   components: {

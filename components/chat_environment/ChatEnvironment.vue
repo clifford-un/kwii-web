@@ -11,9 +11,10 @@
 </template>
 
 <script>
-import ChatMessageList from '~/components/ChatMessageList.vue'
-import ChatToolBar from '~/components/ChatToolBar.vue'
-import ChatMessageBar from '~/components/ChatMessageBar.vue'
+import ChatToolBar from '~/components/chat_environment/ChatToolBar.vue'
+import ChatMessageList from '~/components/chat_environment/message_terminal/ChatMessageList.vue'
+import ChatMessageBar from '~/components/chat_environment/message_terminal/ChatMessageBar.vue'
+
 export default {
   components: {
     ChatMessageList,
