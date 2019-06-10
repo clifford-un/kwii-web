@@ -1,18 +1,30 @@
 import { request } from 'graphql-request'
+import { setData } from 'nuxt-storage/local-storage'
 
-async function submit(username, password) {
+const graphqlURL = 'http://35.245.9.199/graphql'
+
+export default async function getToken(username, password) {
   const query = `
   mutation {
-  createToken(user: {
-  userName: "${username}"
-  password: "${password}"
-  }) {
-  jwt
-  }
+    createToken(
+      user: {
+        userName: "${username}"
+        password: "${password}"
+      }
+    )
+    {
+      jwt,
+      user_id
+    }
   }`
   try {
-    this.jwt = '' + await request('http://192.168.99.113:5500/graphql', query)
-  } catch (e) {
-    this.test = false
+    const answer = await request(graphqlURL, query)
+    const jwt = answer.createToken.jwt
+    const userId = answer.createToken.user_id
+    setData('jwt', jwt)
+    setData('userId', userId)
+    return 'ok!'
+  } catch (err) {
+    return ':s'
   }
 }
