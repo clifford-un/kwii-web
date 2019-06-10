@@ -1,7 +1,13 @@
 <template>
   <v-flex xs4>
     <v-form>
-      <v-text-field ref="username" v-model="username" prepend-icon="face" label="Username" clearable />
+      <v-text-field
+        ref="username"
+        v-model="username"
+        prepend-icon="face"
+        label="Username"
+        clearable
+      />
       <v-expand-transition>
         <v-text-field
           v-show="username"
@@ -12,6 +18,7 @@
           label="Password"
           type="password"
           :rules="passRules"
+          :loading="gettingAnswer"
           @click:append="login"
           @keyup.native.enter="login"
         />
@@ -20,9 +27,6 @@
         <v-alert v-show="gotError" :value="true" type="error">
           It seems wrong for us :s
         </v-alert>
-      </v-fade-transition>
-      <v-fade-transition>
-        <v-progress-linear v-show="gettingAnswer" :indeterminate="true" />
       </v-fade-transition>
     </v-form>
     <v-layout column align-end>

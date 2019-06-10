@@ -1,7 +1,7 @@
 import { request } from 'graphql-request'
 import { setData } from 'nuxt-storage/local-storage'
 
-const graphqlURL = 'http://35.245.9.199/graphql'
+const graphqlURL = 'http://35.221.4.209/graphql'
 
 export default async function getToken(username, password) {
   const query = `
