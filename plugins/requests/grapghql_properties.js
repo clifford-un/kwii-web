@@ -1,0 +1,1 @@
+const graphqlURL = 'http://35.245.9.199/graphql'

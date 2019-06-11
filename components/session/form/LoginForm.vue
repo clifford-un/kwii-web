@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import getToken from '~/plugins/requests/session.js'
+import session from '~/plugins/requests/session.js'
 export default {
   data: () => {
     return {
@@ -72,7 +72,7 @@ export default {
     },
     async login() {
       this.gettingAnswer = true
-      const answer = await getToken(this.username, this.password)
+      const answer = await session.methods.getToken(this.username, this.password)
       if (answer === ':s') {
         this.gotError = true
         this.hideError()

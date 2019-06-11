@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import user from '~/plugins/requests/user.js'
 export default {
   data: () => {
     return {
@@ -56,6 +57,8 @@ export default {
       email: '',
       phone: '',
       show: false,
+      gettingAnswer: false,
+      gotError: false,
       response: 'a',
       usernameRules: [
         v => !!v || 'We need your username to sign you up D:',
@@ -81,8 +84,26 @@ export default {
     login() {
       this.$bus.$emit('session:from:registerForm:login')
     },
-    signup() {
-      throw new TypeError('Not implemented yet!')
+    loadChatSession() {
+      this.$router.push({
+        path: '/chat'
+      })
+    },
+    hideError() {
+      setTimeout(() => { if (this.gotError) { this.gotError = false } }, 5000)
+    },
+    hideLoadingbar() {
+      setTimeout(() => { if (this.gettingAnswer) { this.gettingAnswer = false } }, 1500)
+    },
+    async signup() {
+      const answer = await user.methods.createUser(this.username, this.password, this.email)
+      if (answer === ':s') {
+        this.gotError = true
+        this.hideError()
+      } else {
+        this.loadChatSession()
+      }
+      this.hideLoadingbar()
     }
   }
 }
