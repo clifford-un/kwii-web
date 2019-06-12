@@ -1,7 +1,5 @@
-import { request } from 'graphql-request'
 import { setData } from 'nuxt-storage/local-storage'
-
-const graphqlURL = 'http://35.245.9.199/graphql'
+import gql from '~/plugins/graphql/gql.js'
 
 export default {
   methods: {
@@ -20,7 +18,7 @@ export default {
         }
       }`
       try {
-        const answer = await request(graphqlURL, query)
+        const answer = await gql.methods.request(query)
         const jwt = answer.createToken.jwt
         const userId = answer.createToken.user_id
         setData('jwt', jwt)
