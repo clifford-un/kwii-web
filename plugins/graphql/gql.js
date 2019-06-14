@@ -3,12 +3,13 @@ import { request } from 'graphql-request'
 export default {
   data: () => {
     return {
-      url: 'http://35.245.9.199/graphql'
+      url: 'http://35.221.4.209/graphql'
     }
   },
   methods: {
-    request(query) {
-      return request(this.url, query)
+    async request(query) {
+      const ans = await request('http://35.221.4.209/graphql', query)
+      return ans
     }
   }
 }

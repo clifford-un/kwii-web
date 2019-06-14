@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import session from '~/plugins/requests/session.js'
+import session from '~/plugins/graphql/requests/session.js'
 export default {
   data: () => {
     return {

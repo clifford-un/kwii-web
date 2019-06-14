@@ -1,7 +1,5 @@
-import { request } from 'graphql-request'
-import session from '~/plugins/requests/session.js'
-
-const graphqlURL = 'http://35.245.9.199/graphql'
+import gql from '~/plugins/graphql/gql.js'
+import session from '~/plugins/graphql/requests/session.js'
 
 export default {
   methods: {
@@ -20,7 +18,7 @@ export default {
         } 
       }`
       try {
-        await request(graphqlURL, query)
+        await gql.methods.request(query)
         const loginAns = await session.methods.getToken(username, password)
         if (loginAns === 'ok!') {
           return 'ok!'

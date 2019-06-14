@@ -7,6 +7,7 @@
         label="Username"
         required
         :rules="usernameRules"
+        :loading="gettingAnswer"
       />
       <v-text-field
         v-model="password"
@@ -17,6 +18,7 @@
         label="Password"
         :rules="passwordRules"
         @click:append="show = !show"
+        :loading="gettingAnswer"
       />
       <v-text-field
         v-model="email"
@@ -24,14 +26,21 @@
         name="email"
         label="email"
         :rules="emailRules"
+        :loading="gettingAnswer"
       />
       <v-text-field
         v-model="phone"
         prepend-icon="phone"
         label="phone"
         :rules="phoneRules"
+        :loading="gettingAnswer"
       />
     </v-form>
+    <v-fade-transition>
+      <v-alert v-show="gotError" :value="true" type="error">
+        It seems wrong for us :s
+      </v-alert>
+    </v-fade-transition>
     <v-layout row justify-space-between>
       <v-btn flat color="primary" @click="login">
         <v-icon>
@@ -48,7 +57,7 @@
 </template>
 
 <script>
-import user from '~/plugins/requests/user.js'
+import user from '~/plugins/graphql/requests/user.js'
 export default {
   data: () => {
     return {
@@ -96,6 +105,7 @@ export default {
       setTimeout(() => { if (this.gettingAnswer) { this.gettingAnswer = false } }, 1500)
     },
     async signup() {
+      this.gettingAnswer = true
       const answer = await user.methods.createUser(this.username, this.password, this.email)
       if (answer === ':s') {
         this.gotError = true
