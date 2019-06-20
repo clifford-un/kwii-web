@@ -41,13 +41,26 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vuetify',
-    '@/plugins/eventBus'
+    '@/plugins/eventBus',
+    '@/plugins/firebase/fb_connection'
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
+    ['nuxt-env', {
+      keys: [
+        { key: 'FIREBASE_API_KEY', secret: true },
+        { key: 'FIREBASE_AUTH_DOMAIN', secret: true },
+        { key: 'FIREBASE_DATABASE_URL', secret: true },
+        { key: 'FIREBASE_PROJECT_ID', secret: true },
+        { key: 'FIREBASE_STORAGE_BUCKET', secret: true },
+        { key: 'FIREBASE_MESSAGING_SENDER_ID', secret: true },
+        { key: 'FIREBASE_APP_ID', secret: true },
+        { key: 'FIREBASE_VAPID_KEY', secret: true}
+      ]
+    }]
   ],
 
   /*
