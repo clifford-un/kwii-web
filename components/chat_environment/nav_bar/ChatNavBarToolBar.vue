@@ -17,26 +17,14 @@
   </v-toolbar>
 </template>
 <script>
-import { request } from 'graphql-request'
-import { URL } from 'static/variables.js'
 export default {
   data: () => ({
     drawer: false,
     request: true,
     request_num: 0
   }),
-  async mounted() {
+  mounted() {
     this.$bus.$on('userChatDrawerCall', (drawerState) => { this.drawer = drawerState })
-    const query = `
-    query{
-    userById(id: 1){
-    user{
-      request_number
-    }
-    }
-    }`
-    const response = await request(URL, query)
-    this.request_num = response.userById.user.request_number
   },
   methods: {
     requestViewDrawerCall() {

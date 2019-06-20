@@ -10,8 +10,6 @@
   </v-flex>
 </template>
 <script>
-import { request } from 'graphql-request'
-import { URL } from 'static/variables.js'
 export default {
   data: () => ({
     chatRoomId: 2,
@@ -39,22 +37,7 @@ export default {
     setChat(chat) {
       this.chatRoomId = chat.chatRoomId
     },
-    async getMessages() {
-      const query = `
-      query {
-        chatById(chat_room_id: "${this.chatRoomId}") {
-          chat_text
-          chat_user_origin
-        }
-      }`
-      this.messages = []
-      const messages = await request(URL, query)
-      messages.chatById.forEach((element) => {
-        const dummElement = {}
-        dummElement.mine = element.chat_user_origin === 1
-        dummElement.chat_text = element.chat_text
-        this.messages.push(dummElement)
-      })
+    getMessages() {
     }
   }
 }

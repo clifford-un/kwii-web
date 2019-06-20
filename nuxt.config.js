@@ -19,9 +19,9 @@ module.exports = {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+          'https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp'
       }
-    ]
+    ],
   },
 
   /*
@@ -49,18 +49,6 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    ['nuxt-env', {
-      keys: [
-        { key: 'FIREBASE_API_KEY', secret: true },
-        { key: 'FIREBASE_AUTH_DOMAIN', secret: true },
-        { key: 'FIREBASE_DATABASE_URL', secret: true },
-        { key: 'FIREBASE_PROJECT_ID', secret: true },
-        { key: 'FIREBASE_STORAGE_BUCKET', secret: true },
-        { key: 'FIREBASE_MESSAGING_SENDER_ID', secret: true },
-        { key: 'FIREBASE_APP_ID', secret: true },
-        { key: 'FIREBASE_VAPID_KEY', secret: true}
-      ]
-    }]
   ],
 
   /*

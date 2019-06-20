@@ -17,8 +17,6 @@
   />
 </template>
 <script>
-import { request } from 'graphql-request'
-import { URL } from 'static/variables.js'
 export default {
   data: () => ({
     userId: 1,
@@ -58,18 +56,7 @@ export default {
     messageSent() {
       this.$bus.$emit('messageSent')
     },
-    async sendMessageGraph() {
-      const mut = `
-      mutation {
-        createChat(chat: {
-          chat_user_origin: ${this.userId}
-          chat_room_id: "${this.chatroomId}"
-          chat_text: "${this.message}"
-        }) {
-          chat_text
-        }
-      }`
-      await request(URL, mut)
+    sendMessageGraph() {
     },
     clearMessage() {
       this.message = ''

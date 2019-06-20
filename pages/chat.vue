@@ -1,15 +1,13 @@
 <template>
   <v-app id="chats">
     <chat />
-    <v-navigation-drawer v-model="drawer" absolute app>
-      <user-chats />
-    </v-navigation-drawer>
+    <user-chats />
   </v-app>
 </template>
 
 <script>
-import Chat from '~/components/Chat.vue'
-import UserChats from '~/components/UserChats.vue'
+import Chat from '~/components/chat_environment/ChatEnvironment.vue'
+import UserChats from '~/components/chat_environment/nav_bar/ChatNavbar.vue'
 
 export default {
   components: {

@@ -5,20 +5,25 @@
       <v-content fluid>
         <chat-message-list v-show="wchat" />
         <chat-message-bar v-show="wchat" />
+        <notification />
       </v-content>
     </v-container>
   </v-flex>
 </template>
 
 <script>
-import ChatMessageList from '~/components/ChatMessageList.vue'
-import ChatToolBar from '~/components/ChatToolBar.vue'
-import ChatMessageBar from '~/components/ChatMessageBar.vue'
+import ChatToolBar from '~/components/chat_environment/ChatToolBar.vue'
+import ChatMessageList from '~/components/chat_environment/message_terminal/ChatMessageList.vue'
+import ChatMessageBar from '~/components/chat_environment/message_terminal/ChatMessageBar.vue'
+import Notification from '~/components/chat_environment/notification/notification.vue'
+import fbMessaging from '~/plugins/firebase/fb_connection.js'
+
 export default {
   components: {
     ChatMessageList,
     ChatToolBar,
-    ChatMessageBar
+    ChatMessageBar,
+    Notification
   },
   data: () => ({
     wchat: false
@@ -26,6 +31,9 @@ export default {
   mounted() {
     this.$bus.$on('selectedChat', () => { this.showChat() })
     this.$bus.$on('closeChat', () => { this.hideChat() })
+    fbMessaging.fireMess.onMessage((payload) => {
+      this.$bus.$emit('messageFb', payload)
+    })
   },
   methods: {
     showChat() {
