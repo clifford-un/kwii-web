@@ -14,15 +14,18 @@ export default {
         )
         {
           jwt,
-          user_id
+          user_id,
+          user_name
         }
       }`
       try {
         const answer = await gql.methods.request(query)
         const jwt = answer.createToken.jwt
         const userId = answer.createToken.user_id
-        setData('jwt', jwt)
-        setData('userId', userId)
+        const username = answer.createToken.user_name
+        setData('jwt', jwt, 1, 'd')
+        setData('userId', userId, 1, 'd')
+        setData('username', username, 1, 'd')
         return 'ok!'
       } catch (err) {
         return ':s'
@@ -31,6 +34,7 @@ export default {
     deleteToken() {
       setData('jwt', undefined)
       setData('userId', undefined)
+      setData('username', undefined)
     }
   }
 }

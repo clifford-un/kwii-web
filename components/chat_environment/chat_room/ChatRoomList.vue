@@ -1,7 +1,7 @@
 <template>
   <v-list two-line>
     <template v-for="(chat) in chats">
-      <v-list-tile :key="chat.chatRoomId" avatar @click="selectFriend(chat)">
+      <v-list-tile :key="chat.id" avatar @click="selectFriend(chat)">
         <v-list-tile-avatar>
           <img :src="chat.avatar">
         </v-list-tile-avatar>
@@ -18,6 +18,7 @@
   </v-list>
 </template>
 <script>
+import chatroom from '~/plugins/graphql/requests/chatroom.js'
 export default {
   data: () => ({
     chats: []
@@ -26,7 +27,8 @@ export default {
     this.getFriendList()
   },
   methods: {
-    getFriendList() {
+    async getFriendList() {
+      this.chats = await chatroom.methods.getChatrooms()
     },
     selectFriend(chat) {
       this.$bus.$emit('selectedChat', chat)

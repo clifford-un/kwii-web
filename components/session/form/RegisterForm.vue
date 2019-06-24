@@ -17,8 +17,8 @@
         name="password"
         label="Password"
         :rules="passwordRules"
-        @click:append="show = !show"
         :loading="gettingAnswer"
+        @click:append="show = !show"
       />
       <v-text-field
         v-model="email"

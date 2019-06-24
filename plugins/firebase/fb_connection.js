@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import { setData } from 'nuxt-storage/local-storage'
 import 'firebase/firebase-messaging'
 if (!firebase.apps.length) {
-  const config = {
+  const firebaseConfig = {
     apiKey: 'ADD',
     authDomain: 'ADD',
     databaseURL: 'ADD',
@@ -11,7 +11,7 @@ if (!firebase.apps.length) {
     messagingSenderId: 'ADD',
     appId: 'ADD'
   }
-  firebase.initializeApp(config)
+  firebase.initializeApp(firebaseConfig)
 }
 const fireMess = firebase.messaging()
 fireMess.usePublicVapidKey('ADD')
