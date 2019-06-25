@@ -1,4 +1,4 @@
-import { getData } from 'nuxt-storage/local-storage'
+import { get } from 'local-storage'
 import gql from '~/plugins/graphql/gql.js'
 
 export default {
@@ -7,9 +7,9 @@ export default {
       const queryChatroom = `
       query {
         getChatroomsByUser(
-          username: "${getData('username')}",
-          user_id: ${getData('userId')},
-          token: "${getData('jwt')}"
+          username: "${get('username')}",
+          user_id: ${get('userId')},
+          token: "${get('jwt')}"
         )
         {
           id,
@@ -21,7 +21,7 @@ export default {
         const answer = await gql.methods.request(queryChatroom)
         return answer.getChatroomsByUser
       } catch (err) {
-        return getData('username')
+        return get('username')
       }
     }
   }

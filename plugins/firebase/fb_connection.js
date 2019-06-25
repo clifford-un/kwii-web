@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
-import { setData } from 'nuxt-storage/local-storage'
+import { set } from 'local-storage'
 import 'firebase/firebase-messaging'
+import 'firebase/firebase-storage'
 if (!firebase.apps.length) {
   const firebaseConfig = {
     apiKey: 'ADD',
@@ -13,18 +14,19 @@ if (!firebase.apps.length) {
   }
   firebase.initializeApp(firebaseConfig)
 }
+const fireStorage = firebase.storage()
 const fireMess = firebase.messaging()
 fireMess.usePublicVapidKey('ADD')
 fireMess.onTokenRefresh((refreshedToken) => {
-  setData('fb_token', refreshedToken)
-  setData('fb_error', 'no error')
+  set('fb_token', refreshedToken)
+  set('fb_error', 'no error')
 })
 Notification.requestPermission().then()
 fireMess.getToken().then((refreshedToken) => {
-  setData('fb_token', refreshedToken)
-  setData('fb_error', 'no error')
+  set('fb_token', refreshedToken)
+  set('fb_error', 'no error')
 }).catch((err) => {
-  setData('fb_token', 'no token')
-  setData('fb_error', err)
+  set('fb_token', 'no token')
+  set('fb_error', err)
 })
-export default { fireMess }
+export default { fireMess, fireStorage }

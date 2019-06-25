@@ -5,7 +5,7 @@
     <v-btn icon>
       <v-icon>search</v-icon>
     </v-btn>
-    <v-btn icon>
+    <v-btn icon @click="requestViewUserDrawerCall()">
       <v-icon>more_vert</v-icon>
     </v-btn>
     <v-btn icon @click.stop="requestViewDrawerCall()">
@@ -30,6 +30,9 @@ export default {
     requestViewDrawerCall() {
       this.request = !this.request
       this.$bus.$emit('requestViewDrawerCall', !this.request)
+    },
+    requestViewUserDrawerCall() {
+      this.$bus.$emit('requestViewUserDrawerCall')
     }
   }
 }

@@ -1,4 +1,4 @@
-import { setData } from 'nuxt-storage/local-storage'
+import { set } from 'local-storage'
 import gql from '~/plugins/graphql/gql.js'
 
 export default {
@@ -23,18 +23,18 @@ export default {
         const jwt = answer.createToken.jwt
         const userId = answer.createToken.user_id
         const username = answer.createToken.user_name
-        setData('jwt', jwt, 1, 'd')
-        setData('userId', userId, 1, 'd')
-        setData('username', username, 1, 'd')
+        set('jwt', jwt)
+        set('userId', userId)
+        set('username', username)
         return 'ok!'
       } catch (err) {
         return ':s'
       }
     },
     deleteToken() {
-      setData('jwt', undefined)
-      setData('userId', undefined)
-      setData('username', undefined)
+      set('jwt', undefined)
+      set('userId', undefined)
+      set('username', undefined)
     }
   }
 }

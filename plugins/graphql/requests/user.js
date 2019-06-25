@@ -1,4 +1,5 @@
 import gql from '~/plugins/graphql/gql.js'
+import { get } from 'local-storage'
 import session from '~/plugins/graphql/requests/session.js'
 
 export default {
@@ -25,6 +26,28 @@ export default {
         } else {
           return ':s'
         }
+      } catch (err) {
+        return ':s'
+      }
+    },
+    async getUserInfo() {
+      const query = `
+      query{
+        userById(
+          id: ${get('userId')},
+          token: "${get('jwt')}",
+          username: "${get('username')}"
+        ){
+          user{
+            user_name,
+            e_mail,
+            request_number
+          }
+        }
+      }`
+      try {
+        const userAns = await gql.methods.request(query)
+        return userAns.userById.user
       } catch (err) {
         return ':s'
       }
