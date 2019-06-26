@@ -51,6 +51,28 @@ export default {
       } catch (err) {
         return ':s'
       }
+    },
+    async getUserProfileInfo(id) {
+      const query = `
+      query{
+        userById(
+          id: ${id},
+          token: "${get('jwt')}",
+          username: "${get('username')}"
+        ){
+          user{
+            user_name,
+            e_mail,
+            request_number
+          }
+        }
+      }`
+      try {
+        const userAns = await gql.methods.request(query)
+        return userAns.userById.user
+      } catch (err) {
+        return ':s'
+      }
     }
   }
 }

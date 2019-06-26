@@ -10,6 +10,9 @@ export default {
     getUserAvatar() {
       return this.getImageUri(`users/${get('username')}/images/avatar.avt`)
     },
+    getUserProfileAvatar(username) {
+      return this.getImageUri(`users/${username}/images/avatar.avt`)
+    },
     setUserAvatar(file) {
       const storageRef = fb.fireStorage.ref().child(`users/${get('username')}/images/avatar.avt`)
       return storageRef.put(file)

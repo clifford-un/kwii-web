@@ -11,10 +11,12 @@
         </v-img>
       </v-hover>
     </v-avatar>
-    <input v-show="false" ref="inputUpload" type="file" @change="setFileSave" >
+    <input v-show="false" ref="inputUpload" type="file" @change="setFileSave">
     </input>
     <h1 class="headline">
-      {{ user.username }}
+      <nuxt-link :to="{name: 'profile-id', params: { id: user.id } }">
+        {{ user.username }}
+      </nuxt-link>
     </h1>
     <h1 class="body-2">
       {{ user.email }}
@@ -25,6 +27,7 @@
   </v-layout>
 </template>
 <script>
+import { get } from 'local-storage'
 import user from '~/plugins/graphql/requests/user.js'
 import avatars from '~/plugins/firebase/avatars.js'
 export default {
@@ -33,11 +36,13 @@ export default {
       avatar: 'Test',
       username: 'Test',
       email: 'Test',
-      phone: ''
+      phone: '',
+      id: 0
     },
     file: ''
   }),
   mounted() {
+    this.user.id = get('userId')
     this.getUserInfo()
   },
   methods: {

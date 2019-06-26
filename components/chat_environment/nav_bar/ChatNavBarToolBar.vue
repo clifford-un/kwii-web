@@ -8,7 +8,7 @@
     <v-btn icon @click="requestViewUserDrawerCall()">
       <v-icon>more_vert</v-icon>
     </v-btn>
-    <v-btn icon @click.stop="requestViewDrawerCall()">
+    <v-btn icon @click="requestViewDrawerCall()">
       <v-icon>{{ `${!request ? 'sms' : 'group_add'}` }}</v-icon>
     </v-btn>
     <div v-if="request_num!=0 && request" id="requests">
@@ -19,7 +19,7 @@
 <script>
 export default {
   data: () => ({
-    drawer: false,
+    drawer: true,
     request: true,
     request_num: 0
   }),

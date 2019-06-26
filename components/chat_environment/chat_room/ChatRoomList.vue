@@ -23,7 +23,7 @@ export default {
   data: () => ({
     chats: []
   }),
-  mounted() {
+  beforeMount() {
     this.getFriendList()
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" absolute temporary app>
+  <v-navigation-drawer v-model="drawer">
     <v-layout fill-height align-center>
       <v-card flat column width="100%">
         <v-flex>
@@ -22,7 +22,7 @@ export default {
     right: null
   }),
   mounted() {
-    this.$bus.$on('requestViewUserDrawerCall', (drawerState) => { this.drawer = !drawerState })
+    this.$bus.$on('requestViewUserDrawerCall', (drawerState) => { this.drawer = !this.drawer })
   }
 }
 </script>

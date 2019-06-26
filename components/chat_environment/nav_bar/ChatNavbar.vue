@@ -19,7 +19,7 @@ export default {
     drawer: true
   }),
   mounted() {
-    this.$bus.$on('requestViewDrawerCall', (drawerState) => { this.drawer = !drawerState })
+    this.$bus.$on('userChatDrawerCall', (drawerState) => { this.drawer = drawerState })
   }
 }
 </script>
