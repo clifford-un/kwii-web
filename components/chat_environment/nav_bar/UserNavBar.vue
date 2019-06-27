@@ -1,12 +1,6 @@
 <template>
-  <v-navigation-drawer v-model="drawer">
-    <v-layout fill-height align-center>
-      <v-card flat column width="100%">
-        <v-flex>
-          <User />
-        </v-flex>
-      </v-card>
-    </v-layout>
+  <v-navigation-drawer v-model="drawer" absolute temporary app>
+    <User />
   </v-navigation-drawer>
 </template>
 <script>
